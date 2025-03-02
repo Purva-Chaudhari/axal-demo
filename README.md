@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Axal Proof Verification Portal 📃✅
 
-## Getting Started
+Deployment link : https://axal-demo.vercel.app/ 
 
-First, run the development server:
+## 🔹 Overview
+Axal Proof Verification Portal implements the twitter verification system that allows users to prove that they have retweeted tweets of a particular username. Such systems can be used for giving points or can be extended to verifying more specific tweets. Users receive rewards in ERC-20 tokens (AD20) if the proof is valid. I have used Reclaim Protocol with twitter provider.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔹 How Reclaim Protocol is Used
+1️⃣ User selects a proof type (e.g., verifying a Twitter retweet). <br>
+2️⃣ Reclaim Protocol generates a cryptographic proof and provides a QR code. <br>
+3️⃣ User scans the QR code and submits proof data. <br>
+4️⃣ Currently the dapp verifies retweets from all the tweets returned by the reclaim-sdk, this logic can also be made on chain, had some ideas here <br>
+5️⃣ Smart contract verifies the proof using Reclaim.verifyProof(). If valid, ERC-20 tokens (AD20) are transferred as a reward. <br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Note**: As much as I could explore, it looks like most of the tasks could be done using reclaim. Can extend it as required
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔹 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Technology              | Usage                                                 |
+|-------------------------|------------------------------------------------------|
+| **Next.js (React)**     | Frontend framework                                    |
+| **TailwindCSS**         | UI styling              |
+| **Wagmi**   | Wallet connection & smart contract interactions      |
+| **Reclaim Protocol SDK**| Fetch & verify data                     |
+| **Hardhat**             | Smart contract deployment & testing                  |
+| **Solidity**            | Smart contract logic for proof validation & rewards  |
+| **Vercel**              | Deployment of frontend                               |
+| **Sepolia Testnet**     | Blockchain network         |
 
-## Learn More
+## 🔹 Contracts 
+**Axal Demo** : [0x5F7C99F3d6881e4E13e1DFed3292d9c9269C456e](https://sepolia.etherscan.io/address/0x5F7C99F3d6881e4E13e1DFed3292d9c9269C456e)<br>
+This contract verifies proof and distributes rewards
 
-To learn more about Next.js, take a look at the following resources:
+**AD20** : [0x9c93423966df5f068696d210A945859f66987703](https://sepolia.etherscan.io/address/0x9c93423966df5f068696d210A945859f66987703)
+This is the erc20 used to reward, each successful verification gives 10 AD20
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔹 Demo 
+1. Put Username of the account you want to verify for retweet.
+![alt text](image.png)
+2. Generation of QR code
+![alt text](image-1.png)
+3. Scan QR code on the mobile reclaim app
+![alt text](image-4.png)
+4. Verify Proof
+![alt text](image-2.png)
+5. See AD20 added to your account. Either import the token or check the `balanceOf` your account on the explorer
+![alt text](image-3.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**End Note :**
+Given more time, I could have experimented more with the reclaim fetch, add a custom provider and enhance the contract logic for better onchain flow 
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Thank you!

@@ -50,10 +50,9 @@ export default function Home() {
 
   useEffect(() => {
     async function initializeReclaim() {
-      const APP_ID = process.env.NEXT_PUBLIC_RECLAIM_APP_ID;
-      const APP_SECRET =
-        process.env.NEXT_PUBLIC_RECLAIM_APP_SECRET;
-      const PROVIDER_ID = process.env.NEXT_PUBLIC_RECLAIM_PROVIDER_ID;
+      const APP_ID = "0xa86Bfa90e723Ba587d18282a5c496Fb6A1537A5a";
+      const APP_SECRET = "0x1e0e7dabd93660947e3e00f3c15a49cf22dbce30265bdb5781f39068050a37b4";
+      const PROVIDER_ID = "0b978e97-688f-4e9d-b27f-95a012cb46cc";
 
       const proofRequest = await ReclaimProofRequest.init(
         APP_ID,
